@@ -11,12 +11,18 @@ public class FibonaciiTest {
 
   @BeforeEach
   void setUp() {
-    fibonacii=new Fibonacii();
+    fibonacii = new Fibonacii();
   }
 
   @Test
   void should_return_1_when_calculate_given_position_is_1() {
     int result = fibonacii.calculate(1);
+    assertEquals(1, result);
+  }
+
+  @Test
+  void should_return_1_when_calculate_given_position_is_2() {
+    int result = fibonacii.calculate(2);
     assertEquals(1, result);
   }
 }
