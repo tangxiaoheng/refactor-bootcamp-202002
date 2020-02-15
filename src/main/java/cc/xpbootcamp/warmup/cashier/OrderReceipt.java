@@ -21,38 +21,48 @@ public class OrderReceipt {
 
   public String printReceipt() {
     StringBuilder output = new StringBuilder();
-    buildOrderDescription(output);
-    double totSalesTx = 0d;
-    double tot = 0d;
+    output.append(buildOrderDescription(order));
+    double totalSalesTax = 0d;
+    double totalAmount = 0d;
+    double salesTax;
     for (OrderItem orderItem : order.getOrderItems()) {
-      buildOrderItemDescription(output, orderItem);
-      double salesTax = orderItem.totalAmount() * .10;
-      totSalesTx += salesTax;
-      tot += orderItem.totalAmount() + salesTax;
+      output.append(buildOrderItemDescription(orderItem));
+      salesTax = calculateOrderItemSalesTax(orderItem);
+      totalSalesTax += salesTax;
+      totalAmount += orderItem.totalAmount() + salesTax;
     }
-    buildPriceDescription(output, totSalesTx, tot);
-    return output.toString();
+    return output.append(buildPriceDescription(totalSalesTax, totalAmount)).toString();
   }
 
-  private void buildOrderDescription(StringBuilder output) {
-    output.append(PRINTING_ORDERS + LINE_BREAK_MARK);
-    output.append(order.getCustomerName());
-    output.append(order.getCustomerAddress());
+  private double calculateOrderItemSalesTax(OrderItem orderItem) {
+    return orderItem.totalAmount() * .10;
   }
 
-  private void buildOrderItemDescription(StringBuilder output, OrderItem orderItem) {
-    output.append(orderItem.getDescription());
-    output.append(TAB_MARK);
-    output.append(orderItem.getPrice());
-    output.append(TAB_MARK);
-    output.append(orderItem.getQuantity());
-    output.append(TAB_MARK);
-    output.append(orderItem.totalAmount());
-    output.append(LINE_BREAK_MARK);
+  private String buildOrderDescription(Order order) {
+    StringBuilder stringBuilder = new StringBuilder();
+    stringBuilder.append(PRINTING_ORDERS + LINE_BREAK_MARK);
+    stringBuilder.append(order.getCustomerName());
+    stringBuilder.append(order.getCustomerAddress());
+    return stringBuilder.toString();
   }
 
-  private void buildPriceDescription(StringBuilder output, double totSalesTx, double tot) {
-    output.append(SALES_TAX).append(TAB_MARK).append(totSalesTx);
-    output.append(TOTAL_AMOUNT).append(TAB_MARK).append(tot);
+  private String buildOrderItemDescription(OrderItem orderItem) {
+    StringBuilder stringBuilder = new StringBuilder();
+    stringBuilder.append(orderItem.getDescription());
+    stringBuilder.append(TAB_MARK);
+    stringBuilder.append(orderItem.getPrice());
+    stringBuilder.append(TAB_MARK);
+    stringBuilder.append(orderItem.getQuantity());
+    stringBuilder.append(TAB_MARK);
+    stringBuilder.append(orderItem.totalAmount());
+    stringBuilder.append(LINE_BREAK_MARK);
+    return stringBuilder.toString();
+  }
+
+  private String buildPriceDescription(double totalSalesTax, double total) {
+    StringBuilder stringBuilder = new StringBuilder();
+    stringBuilder.append(SALES_TAX).append(TAB_MARK).append(totalSalesTax);
+    stringBuilder.append(TOTAL_AMOUNT).append(TAB_MARK).append(total);
+    return stringBuilder.toString();
   }
 }
