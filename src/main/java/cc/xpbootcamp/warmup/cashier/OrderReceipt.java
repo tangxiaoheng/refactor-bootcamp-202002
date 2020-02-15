@@ -21,26 +21,38 @@ public class OrderReceipt {
 
   public String printReceipt() {
     StringBuilder output = new StringBuilder();
-    output.append(PRINTING_ORDERS + LINE_BREAK_MARK);
-    output.append(order.getCustomerName());
-    output.append(order.getCustomerAddress());
+    buildOrderDescription(output);
     double totSalesTx = 0d;
     double tot = 0d;
     for (OrderItem orderItem : order.getOrderItems()) {
-      output.append(orderItem.getDescription());
-      output.append(TAB_MARK);
-      output.append(orderItem.getPrice());
-      output.append(TAB_MARK);
-      output.append(orderItem.getQuantity());
-      output.append(TAB_MARK);
-      output.append(orderItem.totalAmount());
-      output.append(LINE_BREAK_MARK);
+      buildOrderItemDescription(output, orderItem);
       double salesTax = orderItem.totalAmount() * .10;
       totSalesTx += salesTax;
       tot += orderItem.totalAmount() + salesTax;
     }
+    buildPriceDescription(output, totSalesTx, tot);
+    return output.toString();
+  }
+
+  private void buildOrderDescription(StringBuilder output) {
+    output.append(PRINTING_ORDERS + LINE_BREAK_MARK);
+    output.append(order.getCustomerName());
+    output.append(order.getCustomerAddress());
+  }
+
+  private void buildOrderItemDescription(StringBuilder output, OrderItem orderItem) {
+    output.append(orderItem.getDescription());
+    output.append(TAB_MARK);
+    output.append(orderItem.getPrice());
+    output.append(TAB_MARK);
+    output.append(orderItem.getQuantity());
+    output.append(TAB_MARK);
+    output.append(orderItem.totalAmount());
+    output.append(LINE_BREAK_MARK);
+  }
+
+  private void buildPriceDescription(StringBuilder output, double totSalesTx, double tot) {
     output.append(SALES_TAX).append(TAB_MARK).append(totSalesTx);
     output.append(TOTAL_AMOUNT).append(TAB_MARK).append(tot);
-    return output.toString();
   }
 }
