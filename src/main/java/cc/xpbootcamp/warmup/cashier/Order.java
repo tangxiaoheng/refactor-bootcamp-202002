@@ -32,7 +32,7 @@ public class Order {
   double totalAmount() {
     return orderItems.stream()
         .mapToDouble(orderItem -> orderItem.totalAmount())
-        .sum();
+        .sum() + totalSalesTax();
   }
 
   double totalSalesTax() {

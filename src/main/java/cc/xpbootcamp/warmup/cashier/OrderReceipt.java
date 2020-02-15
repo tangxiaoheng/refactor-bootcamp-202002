@@ -23,7 +23,7 @@ public class OrderReceipt {
     order.getOrderItems().stream()
         .forEach(orderItem -> output.append(orderItem.buildOrderItemDescription()));
     return output.append(
-        buildPriceDescription(order.totalSalesTax(), order.totalAmount() + order.totalSalesTax()))
+        buildPriceDescription(order.totalSalesTax(), order.totalAmount()))
         .toString();
   }
 
