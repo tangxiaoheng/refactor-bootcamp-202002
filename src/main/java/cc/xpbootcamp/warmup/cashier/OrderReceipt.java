@@ -7,6 +7,12 @@ package cc.xpbootcamp.warmup.cashier;
  */
 public class OrderReceipt {
 
+  private static final String TAB_MARK = "\t";
+  private static final String LINE_BREAK_MARK = "\n";
+  private static final String SALES_TAX = "Sales Tax";
+  private static final String TOTAL_AMOUNT = "Total Amount";
+  private static final String PRINTING_ORDERS = "======Printing Orders======";
+
   private Order order;
 
   public OrderReceipt(Order order) {
@@ -15,26 +21,26 @@ public class OrderReceipt {
 
   public String printReceipt() {
     StringBuilder output = new StringBuilder();
-    output.append("======Printing Orders======\n");
+    output.append(PRINTING_ORDERS + LINE_BREAK_MARK);
     output.append(order.getCustomerName());
     output.append(order.getCustomerAddress());
     double totSalesTx = 0d;
     double tot = 0d;
     for (OrderItem orderItem : order.getOrderItems()) {
       output.append(orderItem.getDescription());
-      output.append('\t');
+      output.append(TAB_MARK);
       output.append(orderItem.getPrice());
-      output.append('\t');
+      output.append(TAB_MARK);
       output.append(orderItem.getQuantity());
-      output.append('\t');
+      output.append(TAB_MARK);
       output.append(orderItem.totalAmount());
-      output.append('\n');
+      output.append(LINE_BREAK_MARK);
       double salesTax = orderItem.totalAmount() * .10;
       totSalesTx += salesTax;
       tot += orderItem.totalAmount() + salesTax;
     }
-    output.append("Sales Tax").append('\t').append(totSalesTx);
-    output.append("Total Amount").append('\t').append(tot);
+    output.append(SALES_TAX).append(TAB_MARK).append(totSalesTx);
+    output.append(TOTAL_AMOUNT).append(TAB_MARK).append(tot);
     return output.toString();
   }
 }
