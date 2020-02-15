@@ -43,4 +43,10 @@ public class FibonaciiTest {
     int result = fibonacii.calculate(5);
     assertEquals(5, result);
   }
+
+  @Test
+  void should_return_8_when_calculate_given_position_is_6() {
+    int result = fibonacii.calculate(6);
+    assertEquals(8, result);
+  }
 }
