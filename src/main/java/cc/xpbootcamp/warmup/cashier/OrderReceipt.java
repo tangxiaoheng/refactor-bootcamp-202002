@@ -27,15 +27,11 @@ public class OrderReceipt {
     double salesTax;
     for (OrderItem orderItem : order.getOrderItems()) {
       output.append(buildOrderItemDescription(orderItem));
-      salesTax = calculateOrderItemSalesTax(orderItem);
+      salesTax = orderItem.salesTax();
       totalSalesTax += salesTax;
       totalAmount += orderItem.totalAmount() + salesTax;
     }
     return output.append(buildPriceDescription(totalSalesTax, totalAmount)).toString();
-  }
-
-  private double calculateOrderItemSalesTax(OrderItem orderItem) {
-    return orderItem.totalAmount() * .10;
   }
 
   private String buildOrderDescription(Order order) {

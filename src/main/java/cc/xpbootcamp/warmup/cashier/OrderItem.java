@@ -28,4 +28,8 @@ public class OrderItem {
   double totalAmount() {
     return price * quantity;
   }
+
+  double salesTax() {
+    return this.totalAmount() * .10;
+  }
 }
