@@ -1,5 +1,8 @@
 package cc.xpbootcamp.warmup.cashier;
 
+import static cc.xpbootcamp.warmup.cashier.Constant.LINE_BREAK_MARK;
+import static cc.xpbootcamp.warmup.cashier.Constant.TAB_MARK;
+
 public class OrderItem {
 
   private String description;
@@ -31,5 +34,18 @@ public class OrderItem {
 
   double salesTax() {
     return this.totalAmount() * .10;
+  }
+
+  String buildOrderItemDescription() {
+    StringBuilder stringBuilder = new StringBuilder();
+    stringBuilder.append(this.getDescription());
+    stringBuilder.append(TAB_MARK);
+    stringBuilder.append(this.getPrice());
+    stringBuilder.append(TAB_MARK);
+    stringBuilder.append(this.getQuantity());
+    stringBuilder.append(TAB_MARK);
+    stringBuilder.append(this.totalAmount());
+    stringBuilder.append(LINE_BREAK_MARK);
+    return stringBuilder.toString();
   }
 }
