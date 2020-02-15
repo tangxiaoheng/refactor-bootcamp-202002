@@ -28,12 +28,12 @@ public class OrderItem {
     return quantity;
   }
 
-  double totalAmount() {
+  double getOrderItemTotalAmount() {
     return price * quantity;
   }
 
-  double salesTax() {
-    return this.totalAmount() * .10;
+  double getSalesTax() {
+    return this.getOrderItemTotalAmount() * .10;
   }
 
   String buildOrderItemDescription() {
@@ -44,7 +44,7 @@ public class OrderItem {
     stringBuilder.append(TAB_MARK);
     stringBuilder.append(this.getQuantity());
     stringBuilder.append(TAB_MARK);
-    stringBuilder.append(this.totalAmount());
+    stringBuilder.append(this.getOrderItemTotalAmount());
     stringBuilder.append(LINE_BREAK_MARK);
     return stringBuilder.toString();
   }

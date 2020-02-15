@@ -29,16 +29,16 @@ public class Order {
     return orderItems;
   }
 
-  double totalAmount() {
+  double getTotalSalesTax() {
     return orderItems.stream()
-        .mapToDouble(orderItem -> orderItem.totalAmount())
-        .sum() + totalSalesTax();
+        .mapToDouble(OrderItem::getSalesTax)
+        .sum();
   }
 
-  double totalSalesTax() {
+  double getTotalAmount() {
     return orderItems.stream()
-        .mapToDouble(orderItem -> orderItem.salesTax())
-        .sum();
+        .mapToDouble(OrderItem::getOrderItemTotalAmount)
+        .sum() + getTotalSalesTax();
   }
 
   String buildOrderDescription() {

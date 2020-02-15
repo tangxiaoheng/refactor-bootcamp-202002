@@ -21,7 +21,7 @@ public class OrderReceipt {
     StringBuilder output = new StringBuilder();
     output.append(order.buildOrderDescription());
     output.append(buildOrderItemsDescription());
-    output.append(buildPriceDescription(order.totalSalesTax(), order.totalAmount()));
+    output.append(buildPriceDescription(order.getTotalSalesTax(), order.getTotalAmount()));
     return output.toString();
   }
 
