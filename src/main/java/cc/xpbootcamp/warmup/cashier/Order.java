@@ -5,12 +5,12 @@ import java.util.List;
 public class Order {
     String customerName;
     String address;
-    List<LineItem> lineItemList;
+    List<OrderItem> orderItems;
 
-    public Order(String customerName, String address, List<LineItem> lineItemList) {
+    public Order(String customerName, String address, List<OrderItem> orderItems) {
         this.customerName = customerName;
         this.address = address;
-        this.lineItemList = lineItemList;
+        this.orderItems = orderItems;
     }
 
     public String getCustomerName() {
@@ -21,7 +21,7 @@ public class Order {
         return address;
     }
 
-    public List<LineItem> getLineItems() {
-        return lineItemList;
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
     }
 }

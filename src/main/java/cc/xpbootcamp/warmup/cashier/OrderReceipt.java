@@ -20,18 +20,18 @@ public class OrderReceipt {
     output.append(order.getCustomerAddress());
     double totSalesTx = 0d;
     double tot = 0d;
-    for (LineItem lineItem : order.getLineItems()) {
-      output.append(lineItem.getDescription());
+    for (OrderItem orderItem : order.getOrderItems()) {
+      output.append(orderItem.getDescription());
       output.append('\t');
-      output.append(lineItem.getPrice());
+      output.append(orderItem.getPrice());
       output.append('\t');
-      output.append(lineItem.getQuantity());
+      output.append(orderItem.getQuantity());
       output.append('\t');
-      output.append(lineItem.totalAmount());
+      output.append(orderItem.totalAmount());
       output.append('\n');
-      double salesTax = lineItem.totalAmount() * .10;
+      double salesTax = orderItem.totalAmount() * .10;
       totSalesTx += salesTax;
-      tot += lineItem.totalAmount() + salesTax;
+      tot += orderItem.totalAmount() + salesTax;
     }
     output.append("Sales Tax").append('\t').append(totSalesTx);
     output.append("Total Amount").append('\t').append(tot);
