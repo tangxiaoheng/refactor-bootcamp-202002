@@ -2,9 +2,9 @@ package cc.xpbootcamp.warmup.fibonacci;
 
 public class Fibonacii {
 
-  public int calculate(int position) {
-    if (position == 1 || position == 2) {
-      return 1;
+  public long calculate(long position) {
+    if (position == 1L || position == 2L) {
+      return 1L;
     }
     return calculate(position - 1) + calculate(position - 2);
   }
