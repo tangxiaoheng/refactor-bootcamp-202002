@@ -20,13 +20,17 @@ public class OrderReceipt {
   public String printReceipt() {
     StringBuilder output = new StringBuilder();
     output.append(order.buildOrderDescription());
-    order.getOrderItems().stream()
-        .forEach(orderItem -> output.append(orderItem.buildOrderItemDescription()));
-    return output.append(
-        buildPriceDescription(order.totalSalesTax(), order.totalAmount()))
-        .toString();
+    output.append(buildOrderItemsDescription());
+    output.append(buildPriceDescription(order.totalSalesTax(), order.totalAmount()));
+    return output.toString();
   }
 
+  private String buildOrderItemsDescription() {
+    StringBuilder stringBuilder = new StringBuilder();
+    order.getOrderItems().stream()
+        .forEach(orderItem -> stringBuilder.append(orderItem.buildOrderItemDescription()));
+    return stringBuilder.toString();
+  }
 
   private String buildPriceDescription(double totalSalesTax, double total) {
     StringBuilder stringBuilder = new StringBuilder();
